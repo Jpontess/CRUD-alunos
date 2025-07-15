@@ -13,6 +13,19 @@ app.get('/aluno', (req, res)=>{
     res.json(banco)
 })
 
+app.get('/aluno/:id', (req, res)=>{
+    const {id} = req.params
+
+    const lerPorId = banco.find(b => b.id === parseInt(id))
+
+    if(!lerPorId){
+        return res.status(404).json({mensagem: 'Aluno naão encontrado'})
+    }
+
+    res.json(lerPorId)
+})
+
+
 app.post('/aluno/cadastro', (req, res)=>{
     const {id, nome, idade, modalidade} = req.body
 
